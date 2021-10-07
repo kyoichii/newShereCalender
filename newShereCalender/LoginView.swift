@@ -47,9 +47,10 @@ struct Login: View{
                 .fontWeight(.bold)
             VStack{
                 TextField("メールアドレス", text: $email)
+                    .keyboardType(.emailAddress)
                     .padding(10)
                 Divider().padding()
-                SecureField("パスワード", text: self.$pass)
+                SecureField("6文字以上のパスワード", text: self.$pass)
                     .padding(10)
             }
             .frame(width: 350, height: 160)
@@ -88,7 +89,7 @@ struct Login: View{
                     .foregroundColor(Color.black)
             })
                 .sheet(isPresented:$showingregisterSheet){
-                    RegisterView()  //新規登録画面
+                    RegisterView()  //新規登録画面へ
                 }
         }
     }
