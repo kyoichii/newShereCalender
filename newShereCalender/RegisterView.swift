@@ -7,9 +7,61 @@
 
 import SwiftUI
 
+// MARK: 新規登録画面
 struct RegisterView: View {
+    
+    //各入力項目を格納する変数
+    @State var email = ""   //メールアドレス
+    @State var pass = ""    //パスワード
+    @Environment(\.presentationMode) var presentationMode   //Sheetを閉じるために必要な変数
+    @State var profilesettingsheet = false //プロフィール設定画面を表示するためのフラグ
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            HStack{
+                //ログイン画面へ
+                Button(action: {
+                    //Sheetを閉じる処理
+                    presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Image(systemName: "multiply")
+                        .font(.system(size:30))
+                        .foregroundColor(Color.black)
+                        .padding()
+                })
+                Spacer()
+            }
+         Spacer()
+            Text("アカウント登録")
+                .fontWeight(.bold)
+                .font(.system(size:25))
+            VStack{
+                TextField("メールアドレス", text: $email)
+                    .padding(10)
+                Divider().padding()
+                SecureField("6文字以上のパスワード", text: self.$pass)
+                    .padding(10)
+            }
+            
+            .frame(width: 350, height: 160)
+            .border(Color.gray)
+            .padding()
+            //アカウント作成ボタン
+            Button(action:{
+                //アカウント作成処理は今後追加
+                self.profilesettingsheet = true //フラグ変更
+            }, label: {
+                Text("アカウントを作成する")
+                    .frame(width:300, height: 30)
+                    .foregroundColor(Color.white)
+                    .padding()
+                    .background(Color.green)
+                    .cornerRadius(10)
+            }).fullScreenCover(isPresented: $profilesettingsheet) {
+                ProfileSetting()    //fullsheetでプロフィール設定画面へ
+            }
+            Spacer()
+        }
     }
 }
 
