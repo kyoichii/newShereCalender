@@ -1,0 +1,6 @@
+framework module Pods_newShereCalender {
+  umbrella header "Pods-newShereCalender-umbrella.h"
+
+  export *
+  module * { export * }
+}
