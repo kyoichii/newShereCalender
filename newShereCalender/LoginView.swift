@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-//ログインしているかどうかの判断
+// MARK: ログインしているかどうかの判断
 struct LoginView: View {
     @State private var show = false
     @State var status = UserDefaults.standard.value(forKey: "status") as? Bool ?? false
@@ -30,13 +30,14 @@ struct LoginView_Previews: PreviewProvider {
     }
 }
 
-//ログイン画面
+// MARK: ログイン画面
 struct Login: View{
     //各入力項目を格納させるための変数
     @State var email = ""   //メールアドレス
     @State var pass = ""    //パスワード
     var body: some View{
         VStack(alignment: .center){
+            Spacer()
             Text("ログイン")
                 .font(.largeTitle)
                 .fontWeight(.bold)
@@ -49,14 +50,37 @@ struct Login: View{
             }
             .frame(width: 350, height: 160)
             .border(Color.gray)
-            
+            //パスワードリセットボタン
+            Button(action: {
+                //クリックイベントを後に追加
+            }, label: {
+                Text("パスワードを忘れた場合はこちら")
+                    .font(.system(size: 13))
+                    .padding()
+            })
+            //ログインボタン
             Button(action:{
-                
+                //クリックイベントを後に追加
             }, label: {
                 Text("ログイン")
-                    .font(.system(size: 20))
+                    .foregroundColor(Color.white)
+                    .padding(EdgeInsets(
+                        top: 10, leading: 125, bottom: 10, trailing: 125
+                    ))
+                    .background(Color.green)
+                    .cornerRadius(10)
+            })
+            Spacer()
+            //アカウント作成ボタン
+            Button(action:{
+                //クリックイベントを後に追加
+            }, label: {
+                Text("アカウントがない場合は")
+                    .font(.system(size: 15))
                     .foregroundColor(Color.black)
-                    .padding()
+                 + Text("作成する")
+                    .font(.system(size: 17).bold())
+                    .foregroundColor(Color.black)
             })
         }
     }
