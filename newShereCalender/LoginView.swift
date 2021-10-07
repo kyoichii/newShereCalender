@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 // MARK: ログインしているかどうかの判断
 struct LoginView: View {
@@ -32,9 +33,12 @@ struct LoginView_Previews: PreviewProvider {
 
 // MARK: ログイン画面
 struct Login: View{
+    
     //各入力項目を格納させるための変数
     @State var email = ""   //メールアドレス
     @State var pass = ""    //パスワード
+    @State var showingregisterSheet = false //新規登録画面を表示させるためのフラグ
+    
     var body: some View{
         VStack(alignment: .center){
             Spacer()
@@ -70,18 +74,22 @@ struct Login: View{
                     .background(Color.green)
                     .cornerRadius(10)
             })
+            
             Spacer()
             //アカウント作成ボタン
-            Button(action:{
-                //クリックイベントを後に追加
+            Button(action:{               
+                self.showingregisterSheet.toggle()  //フラグの変更
             }, label: {
                 Text("アカウントがない場合は")
                     .font(.system(size: 15))
                     .foregroundColor(Color.black)
-                 + Text("作成する")
+                + Text("作成する")
                     .font(.system(size: 17).bold())
                     .foregroundColor(Color.black)
             })
+                .sheet(isPresented:$showingregisterSheet){
+                    RegisterView()  //新規登録画面
+                }
         }
     }
 }
