@@ -42,9 +42,13 @@ struct Login: View{
     var body: some View{
         VStack(alignment: .center){
             Spacer()
+            
+            //タイトル
             Text("ログイン")
                 .font(.largeTitle)
                 .fontWeight(.bold)
+            
+            //ログイン入力項目
             VStack{
                 TextField("メールアドレス", text: $email)
                     .keyboardType(.emailAddress)
@@ -55,17 +59,21 @@ struct Login: View{
             }
             .frame(width: 350, height: 160)
             .border(Color.gray)
+            
             //パスワードリセットボタン
             Button(action: {
-                //クリックイベントを後に追加
+                //パスリセットボタンクリック処理
+                //内容(設定したメールアドレスにメールを送り、パスワードを再設定)
             }, label: {
                 Text("パスワードを忘れた場合はこちら")
                     .font(.system(size: 13))
                     .padding()
             })
+            
             //ログインボタン
             Button(action:{
-                //クリックイベントを後に追加
+                //ログインボタンクリック処理
+                //内容(メールアドレスとパスワードを認証させ成功ならホーム画面へ遷移)
             }, label: {
                 Text("ログイン")
                     .foregroundColor(Color.white)
@@ -75,8 +83,8 @@ struct Login: View{
                     .background(Color.green)
                     .cornerRadius(10)
             })
-            
             Spacer()
+            
             //アカウント作成ボタン
             Button(action:{               
                 self.showingregisterSheet.toggle()  //フラグの変更
