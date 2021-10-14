@@ -7,5 +7,6 @@ target 'newShereCalender' do
 
   # Pods for newShereCalender
  pod 'Firebase/Analytics'
+ pod 'Firebase/Auth'
 
 end
