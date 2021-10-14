@@ -32,23 +32,27 @@ struct RegisterView: View {
                 Spacer()
             }
          Spacer()
+            //タイトル
             Text("アカウント登録")
                 .fontWeight(.bold)
                 .font(.system(size:25))
+            
+            //アカウント登録入力項目
             VStack{
                 TextField("メールアドレス", text: $email)
+                    .keyboardType(.emailAddress)
                     .padding(10)
                 Divider().padding()
                 SecureField("6文字以上のパスワード", text: self.$pass)
                     .padding(10)
             }
-            
             .frame(width: 350, height: 160)
             .border(Color.gray)
             .padding()
+            
             //アカウント作成ボタン
             Button(action:{
-                //アカウント作成処理は今後追加
+                //アカウント作成ボタンクリック処理
                 self.profilesettingsheet = true //フラグ変更
             }, label: {
                 Text("アカウントを作成する")
