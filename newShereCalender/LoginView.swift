@@ -19,7 +19,12 @@ struct LoginView: View {
                 HomeMenu()
             }else{
                 //ログインしてないならログイン画面へ
-                Login()
+                Login(show: self.$show)
+            }
+        }.onAppear {
+            NotificationCenter.default.addObserver(forName: NSNotification.Name("status"), object: nil, queue: .main) { (_) in
+                
+                self.status = UserDefaults.standard.value(forKey: "status") as? Bool ?? false
             }
         }
     }
@@ -38,6 +43,8 @@ struct Login: View{
     @State var email = ""   //メールアドレス
     @State var pass = ""    //パスワード
     @State var showingregisterSheet = false //新規登録画面を表示させるためのフラグ
+    @State var error = ""   //ログイン処理でエラーが出たときにエラー文を格納する変数
+    @Binding var show: Bool
     
     var body: some View{
         VStack(alignment: .center){
@@ -73,6 +80,7 @@ struct Login: View{
             //ログインボタン
             Button(action:{
                 //ログインボタンクリック処理
+                self.verify()
                 //内容(メールアドレスとパスワードを認証させ成功ならホーム画面へ遷移)
             }, label: {
                 Text("ログイン")
@@ -86,7 +94,7 @@ struct Login: View{
             Spacer()
             
             //アカウント作成ボタン
-            Button(action:{               
+            Button(action:{
                 self.showingregisterSheet.toggle()  //フラグの変更
             }, label: {
                 Text("アカウントがない場合は")
@@ -99,6 +107,28 @@ struct Login: View{
                 .sheet(isPresented:$showingregisterSheet){
                     RegisterView()  //新規登録画面へ
                 }
+        }
+    }
+    
+    //ログインボタンが押された時に呼び出される処理
+    func verify(){
+        //文字がきちんと入力されているかの判定
+        if self.email != "" && self.pass != ""{
+            
+            //Firebase Authに認証を投げる
+            Auth.auth().signIn(withEmail: self.email, password: self.pass) { (res, err) in
+                if err != nil{
+                    self.error = err!.localizedDescription
+                    return
+                }
+                //成功したとき
+                print("ログイン成功")
+                UserDefaults.standard.set(true, forKey: "status")   //キーバリュー変更
+                NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
+            }
+        }
+        else{
+            self.error = "Please fill all the contents properly"
         }
     }
     
