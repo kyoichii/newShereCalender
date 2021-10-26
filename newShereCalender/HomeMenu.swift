@@ -9,7 +9,18 @@ import SwiftUI
 
 struct HomeMenu: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            Spacer()
+            HStack{
+                //下に置くボタンの表示
+                common_homebutton(imagename: "calendar", textname: "カレンダー", fontred: 68, fontblue: 115, fontgreen: 210, backred: 172, backblue: 199, backgreen: 254)
+                    
+                common_homebutton(imagename: "square.and.pencil", textname: "メモ", fontred: 68, fontblue: 115, fontgreen: 210, backred: 172, backblue: 199, backgreen: 254)
+                common_homebutton(imagename: "plus", textname: "作成", fontred: 244, fontblue: 244, fontgreen: 244, backred: 26, backblue: 103, backgreen: 203)
+                common_homebutton(imagename: "globe", textname: "検索", fontred: 68, fontblue: 115, fontgreen: 210, backred: 172, backblue: 199, backgreen: 254)
+                common_homebutton(imagename: "gearshape", textname: "設定", fontred: 68, fontblue: 115, fontgreen: 210, backred: 172, backblue: 199, backgreen: 254)
+            }
+        }
     }
 }
 
