@@ -45,6 +45,9 @@ struct Login: View{
     @State var showingregisterSheet = false //新規登録画面を表示させるためのフラグ
     @State var error = ""   //ログイン処理でエラーが出たときにエラー文を格納する変数
     @Binding var show: Bool
+    //アラートを表示するための変数
+    @State var mailandpasserror = false //エラー
+    @State var seikimailerror = false   //正規表現エラー
     
     var body: some View{
         VStack(alignment: .center){
@@ -81,7 +84,6 @@ struct Login: View{
             Button(action:{
                 //ログインボタンクリック処理
                 self.verify()
-                //内容(メールアドレスとパスワードを認証させ成功ならホーム画面へ遷移)
             }, label: {
                 Text("ログイン")
                     .foregroundColor(Color.white)
@@ -91,6 +93,23 @@ struct Login: View{
                     .background(Color.green)
                     .cornerRadius(10)
             })
+            //各エラーに対応したアラートを表示する
+            .alert(isPresented: $mailandpasserror) {
+                switch(seikimailerror) {
+                case false:
+                    //どちらかが空白の時に表示されるエラー
+                    return Alert(
+                        title: Text("ログインエラー"),
+                        message: Text("メールアドレスかパスワードが空白です。")
+                    )
+                case true:
+                    //正規表現が正しくない場合に表示されるエラー
+                    return Alert(
+                        title: Text("ログインエラー"),
+                        message: Text("正しいメールアドレスを入力してください")
+                    )
+                }
+            }
             Spacer()
             
             //アカウント作成ボタン
@@ -113,8 +132,7 @@ struct Login: View{
     //ログインボタンが押された時に呼び出される処理
     func verify(){
         //文字がきちんと入力されているかの判定
-        if self.email != "" && self.pass != ""{
-            
+        if self.email != "" && self.pass != "" && validateEmail(candidate: email) == true{
             //Firebase Authに認証を投げる
             Auth.auth().signIn(withEmail: self.email, password: self.pass) { (res, err) in
                 if err != nil{
@@ -126,10 +144,23 @@ struct Login: View{
                 UserDefaults.standard.set(true, forKey: "status")   //キーバリュー変更
                 NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
             }
-        }
-        else{
+        }else if self.email == "" || self.pass == ""{
             self.error = "Please fill all the contents properly"
+            //パスワードかメールアドレスが空白の場合の処理
+            self.mailandpasserror.toggle()
+            print("空白エラー")
+        }else{
+            //正規表現が間違っていた場合
+            self.mailandpasserror.toggle()
+            self.seikimailerror.toggle()
+            print("正規表現エラー")
         }
+    }
+    
+    // メールアドレスの確認するための正規表現
+    func validateEmail(candidate: String) -> Bool {
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
+        return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: candidate)
     }
     
 }
