@@ -6,6 +6,12 @@
 //
 
 import SwiftUI
+import Firebase
+
+enum TorokuAlert{
+    case alert1
+    case alert2
+}
 
 // MARK: 新規登録画面
 struct RegisterView: View {
@@ -13,6 +19,10 @@ struct RegisterView: View {
     //各入力項目を格納する変数
     @State var email = ""   //メールアドレス
     @State var pass = ""    //パスワード
+    //アラートを表示するための変数
+    @State var erroralert = false
+    @State var erroralerttype:TorokuAlert = .alert1
+    
     @Environment(\.presentationMode) var presentationMode   //Sheetを閉じるために必要な変数
     @State var profilesettingsheet = false //プロフィール設定画面を表示するためのフラグ
     
@@ -31,7 +41,7 @@ struct RegisterView: View {
                 })
                 Spacer()
             }
-         Spacer()
+            Spacer()
             //タイトル
             Text("アカウント登録")
                 .fontWeight(.bold)
@@ -53,7 +63,7 @@ struct RegisterView: View {
             //アカウント作成ボタン
             Button(action:{
                 //アカウント作成ボタンクリック処理
-                self.profilesettingsheet = true //フラグ変更
+                verify()
             }, label: {
                 Text("アカウントを作成する")
                     .frame(width:300, height: 30)
@@ -61,11 +71,62 @@ struct RegisterView: View {
                     .padding()
                     .background(Color.green)
                     .cornerRadius(10)
-            }).fullScreenCover(isPresented: $profilesettingsheet) {
-                ProfileSetting()    //fullsheetでプロフィール設定画面へ
-            }
+            })
+                .fullScreenCover(isPresented: $profilesettingsheet) {
+                    ProfileSetting()    //fullsheetでプロフィール設定画面へ
+                }
+            //各エラーに対応したアラートを表示する
+                .alert(isPresented: $erroralert){
+                    switch erroralerttype{
+                    case .alert1:
+                        //どちらかが空白の時に表示されるエラー
+                        return Alert(
+                            title: Text("ログインエラー"),
+                            message: Text("メールアドレスかパスワードが空白です。")
+                        )
+                    case .alert2:
+                        //正規表現が正しくない場合に表示されるエラー
+                        return Alert(
+                            title: Text("ログインエラー"),
+                            message: Text("正しいメールアドレスを入力してください")
+                        )
+                    }
+                }
             Spacer()
         }
+    }
+    
+    //新規登録を行う処理
+    func verify(){
+        //文字がきちんと入力されているかの判定
+        if self.email != "" && self.pass != "" && validateEmail(candidate: email) == true{
+            Auth.auth().createUser(withEmail: email, password: pass) { user, error in
+                if (user != nil && error == nil) {
+                    //新規登録成功
+                    print("登録完了")
+                    self.profilesettingsheet = true //フラグ変更
+                }else{
+                    //新規登録失敗
+                    print("新規登録失敗")
+                }
+            }
+        }else if self.email == "" || self.pass == ""{
+            //パスワードかメールアドレスが空白の場合の処理
+            erroralerttype = .alert1
+            self.erroralert.toggle()
+            print("空白エラー")
+        }else{
+            //正規表現が間違っていた場合
+            erroralerttype = .alert2
+            self.erroralert.toggle()
+            print("正規表現エラー")
+        }
+    }
+    
+    // メールアドレスの確認するための正規表現
+    func validateEmail(candidate: String) -> Bool {
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
+        return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: candidate)
     }
 }
 
