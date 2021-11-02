@@ -36,6 +36,12 @@ struct LoginView_Previews: PreviewProvider {
     }
 }
 
+enum AlertType{
+    case alert1
+    case alert2
+    case alert3
+}
+
 // MARK: ログイン画面
 struct Login: View{
     
@@ -46,13 +52,12 @@ struct Login: View{
     @State var error = ""   //ログイン処理でエラーが出たときにエラー文を格納する変数
     @Binding var show: Bool
     //アラートを表示するための変数
-    @State var mailandpasserror = false //エラー
-    @State var seikimailerror = false   //正規表現エラー
+    @State var erroralert = false
+    @State var erroralerttype:AlertType = .alert1
     
     var body: some View{
         VStack(alignment: .center){
             Spacer()
-            
             //タイトル
             Text("ログイン")
                 .font(.largeTitle)
@@ -92,24 +97,29 @@ struct Login: View{
                     ))
                     .background(Color.green)
                     .cornerRadius(10)
-            })
-            //各エラーに対応したアラートを表示する
-            .alert(isPresented: $mailandpasserror) {
-                switch(seikimailerror) {
-                case false:
-                    //どちらかが空白の時に表示されるエラー
-                    return Alert(
-                        title: Text("ログインエラー"),
-                        message: Text("メールアドレスかパスワードが空白です。")
-                    )
-                case true:
-                    //正規表現が正しくない場合に表示されるエラー
-                    return Alert(
-                        title: Text("ログインエラー"),
-                        message: Text("正しいメールアドレスを入力してください")
-                    )
+            })//各エラーに対応したアラートを表示する
+                .alert(isPresented: $erroralert){
+                    switch erroralerttype{
+                    case .alert1:
+                        //どちらかが空白の時に表示されるエラー
+                        return Alert(
+                            title: Text("ログインエラー"),
+                            message: Text("メールアドレスかパスワードが空白です。")
+                        )
+                    case .alert2:
+                        //正規表現が正しくない場合に表示されるエラー
+                        return Alert(
+                            title: Text("ログインエラー"),
+                            message: Text("正しいメールアドレスを入力してください")
+                        )
+                    case .alert3:
+                        //パスワードが間違っていた時のエラー
+                        return Alert(
+                            title: Text("ログインエラー"),
+                            message: Text("パスワードが間違っています。")
+                        )
+                    }
                 }
-            }
             Spacer()
             
             //アカウント作成ボタン
@@ -122,37 +132,42 @@ struct Login: View{
                 + Text("作成する")
                     .font(.system(size: 17).bold())
                     .foregroundColor(Color.black)
-            })
-                .sheet(isPresented:$showingregisterSheet){
-                    RegisterView()  //新規登録画面へ
-                }
+            }).sheet(isPresented:$showingregisterSheet){
+                RegisterView()  //新規登録画面へ
+            }
         }
     }
     
-    //ログインボタンが押された時に呼び出される処理
+    //MARK: ログインボタンが押された時に呼び出される処理
     func verify(){
         //文字がきちんと入力されているかの判定
         if self.email != "" && self.pass != "" && validateEmail(candidate: email) == true{
             //Firebase Authに認証を投げる
-            Auth.auth().signIn(withEmail: self.email, password: self.pass) { (res, err) in
-                if err != nil{
-                    self.error = err!.localizedDescription
-                    return
+            Auth.auth().signIn(withEmail: self.email, password: self.pass) { (user, error) in
+                if (user != nil && error == nil) {
+                    // ログイン成功
+                    print("ログイン成功")
+                    UserDefaults.standard.set(true, forKey: "status")   //キーバリュー変更
+                    NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
+                } else {
+                    // ログイン失敗
+                    erroralerttype = .alert3
+                    print("ログイン失敗")
+                    erroralert.toggle()
                 }
-                //成功したとき
-                print("ログイン成功")
-                UserDefaults.standard.set(true, forKey: "status")   //キーバリュー変更
-                NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
             }
+            
+            
         }else if self.email == "" || self.pass == ""{
             self.error = "Please fill all the contents properly"
             //パスワードかメールアドレスが空白の場合の処理
-            self.mailandpasserror.toggle()
+            erroralerttype = .alert1
+            self.erroralert.toggle()
             print("空白エラー")
         }else{
             //正規表現が間違っていた場合
-            self.mailandpasserror.toggle()
-            self.seikimailerror.toggle()
+            erroralerttype = .alert2
+            self.erroralert.toggle()
             print("正規表現エラー")
         }
     }
