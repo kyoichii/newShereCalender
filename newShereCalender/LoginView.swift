@@ -97,7 +97,8 @@ struct Login: View{
                     ))
                     .background(Color.green)
                     .cornerRadius(10)
-            })//各エラーに対応したアラートを表示する
+            })
+            //各エラーに対応したアラートを表示する
                 .alert(isPresented: $erroralert){
                     switch erroralerttype{
                     case .alert1:
