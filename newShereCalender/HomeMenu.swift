@@ -10,9 +10,24 @@ import SwiftUI
 struct HomeMenu: View {
     var body: some View {
         VStack{
+            HStack {
+                Button(action:{
+                    // ボタンをタップするとドロワーを開く
+                }) {
+                    Image(systemName: "list.bullet")
+                        .foregroundColor(Color.init(red: 68/255, green: 210/255, blue: 115/255))
+                        .font(.system(size:17))
+                }
+                Spacer()
+                Text("カレンダー").padding().font(.system(size:20))
+                Spacer()
+            }.padding()
             Spacer()
+            CalenderView()
+            Spacer().frame(height: 50)
+            //下に配置するボタンの表示
             HStack{
-                //下に置くボタンの表示
+                
                 common_homebutton(imagename: "calendar", textname: "カレンダー", fontred: 68, fontblue: 115, fontgreen: 210, backred: 172, backblue: 199, backgreen: 254)
                     
                 common_homebutton(imagename: "square.and.pencil", textname: "メモ", fontred: 68, fontblue: 115, fontgreen: 210, backred: 172, backblue: 199, backgreen: 254)
