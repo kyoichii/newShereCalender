@@ -117,7 +117,7 @@ struct Login: View{
                         //パスワードが間違っていた時のエラー
                         return Alert(
                             title: Text("ログインエラー"),
-                            message: Text("パスワードが間違っています。")
+                            message: Text("メールアドレスかパスワードが間違っています。")
                         )
                     }
                 }
