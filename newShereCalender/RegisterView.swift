@@ -11,6 +11,7 @@ import Firebase
 enum TorokuAlert{
     case alert1
     case alert2
+    case alert3
 }
 
 // MARK: 新規登録画面
@@ -81,16 +82,23 @@ struct RegisterView: View {
                     case .alert1:
                         //どちらかが空白の時に表示されるエラー
                         return Alert(
-                            title: Text("ログインエラー"),
+                            title: Text("登録エラー"),
                             message: Text("メールアドレスかパスワードが空白です。")
                         )
                     case .alert2:
                         //正規表現が正しくない場合に表示されるエラー
                         return Alert(
-                            title: Text("ログインエラー"),
+                            title: Text("登録エラー"),
                             message: Text("正しいメールアドレスを入力してください")
                         )
+                    case .alert3:
+                        //新規登録が失敗した場合に表示されるエラー
+                        return Alert(
+                            title: Text("登録エラー"),
+                            message: Text("パスワードは6文字以上です。")
+                        )
                     }
+                    
                 }
             Spacer()
         }
@@ -108,6 +116,8 @@ struct RegisterView: View {
                 }else{
                     //新規登録失敗
                     print("新規登録失敗")
+                    erroralerttype = .alert3
+                    self.erroralert.toggle()
                 }
             }
         }else if self.email == "" || self.pass == ""{
