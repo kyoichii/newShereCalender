@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 // MARK: プロフィール設定画面
 struct ProfileSetting: View {
@@ -22,6 +23,13 @@ struct ProfileSetting: View {
         dformat.dateFormat = "yyyy年MM月dd日"
         return dformat
     }
+    //databeseに接続
+    let db = Firestore.firestore()
+    //Sheetを閉じるために必要な変数
+    @Environment(\.presentationMode) var presentationMode
+    //ホーム画面遷移イベント
+    @State var home = false
+    
     var body: some View {
         VStack {
             Text("プロフィール編集")
@@ -64,8 +72,8 @@ struct ProfileSetting: View {
             Spacer()
             //保存ボタン
             Button(action:{
-                //保存ボタンクリックイベント処理は今後追加
-                //内容(名前と生年月日をデータベースに登録しホーム画面へ遷移)
+                //保存ボタンクリックイベント
+                setbutton()
             }, label: {
                 Text("保存")
                     .frame(width:400, height: 30)
@@ -74,7 +82,31 @@ struct ProfileSetting: View {
                     .background(Color.green)
                     .cornerRadius(10)
             })
-            
+                .fullScreenCover(isPresented: $home) {
+                    LoginView()
+                }
+        }
+    }
+    // MARK: ユーザー名などの登録処理
+    func setbutton(){
+        // 新規登録したユーザーのUIDを取得
+        let userID = Auth.auth().currentUser!.uid
+        //データを登録(ドキュメントに各ユーザのUIDを使用している)
+        db.collection("user").document("\(userID)").setData([
+            "name": "\(name)",
+            "birthday": "\(dateFormat.string(from: savedDate ?? Date()))"
+        ]) { err in
+            if let err = err {
+                //データバース登録失敗
+                print("Error writing document: \(err)") //エラー内容の表示
+                print("失敗")
+            } else {
+                //データベース登録成功
+                print("成功!")
+                home.toggle()
+                UserDefaults.standard.set(true, forKey: "status")   //キーバリュー変更
+                NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
+            }
         }
     }
 }
@@ -89,7 +121,6 @@ struct DatePickerWithButtons: View {
     var body: some View {
         VStack {
             DatePicker("", selection: $selectedDate, displayedComponents: .date).datePickerStyle(WheelDatePickerStyle()).environment(\.locale, Locale(identifier: "ja_JP"))
-            
             Divider()
             HStack {
                 
