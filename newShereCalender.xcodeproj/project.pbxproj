@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		03B233A9CF6B2C6E866A9F03 /* Pods_newShereCalender.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 408A4C69E2FA6D58113C42C2 /* Pods_newShereCalender.framework */; };
+		190F40E42727C5C400E0D41A /* common-homebutton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190F40E32727C5C400E0D41A /* common-homebutton.swift */; };
+		190F40E82727C64000E0D41A /* MemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190F40E72727C64000E0D41A /* MemoView.swift */; };
+		190F40EA2727C64F00E0D41A /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190F40E92727C64F00E0D41A /* CalenderView.swift */; };
+		190F40EC2727C65F00E0D41A /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190F40EB2727C65F00E0D41A /* AddView.swift */; };
+		190F40F02727C68700E0D41A /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190F40EF2727C68700E0D41A /* SearchView.swift */; };
+		190F40F22727C75500E0D41A /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190F40F12727C75500E0D41A /* SettingView.swift */; };
 		198AD69E2717D30400456A10 /* FirebaseProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AD69D2717D30400456A10 /* FirebaseProcess.swift */; };
 		19956046270C292300BBDC4B /* newShereCalenderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19956045270C292300BBDC4B /* newShereCalenderApp.swift */; };
 		19956048270C292300BBDC4B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19956047270C292300BBDC4B /* ContentView.swift */; };
@@ -17,10 +23,18 @@
 		19956056270C337A00BBDC4B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19956055270C337A00BBDC4B /* LoginView.swift */; };
 		19956058270C358D00BBDC4B /* HomeMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19956057270C358D00BBDC4B /* HomeMenu.swift */; };
 		19A6ED39270E84820062BB36 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A6ED38270E84820062BB36 /* RegisterView.swift */; };
+		19BD2A132733613500AF5AD8 /* CalenderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BD2A122733613500AF5AD8 /* CalenderList.swift */; };
+		19BD2A15273361AE00AF5AD8 /* CalenderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BD2A14273361AE00AF5AD8 /* CalenderViewModel.swift */; };
 		19F7FCA1270E99CD00224731 /* ProfileSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F7FCA0270E99CD00224731 /* ProfileSetting.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		190F40E32727C5C400E0D41A /* common-homebutton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "common-homebutton.swift"; sourceTree = "<group>"; };
+		190F40E72727C64000E0D41A /* MemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoView.swift; sourceTree = "<group>"; };
+		190F40E92727C64F00E0D41A /* CalenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
+		190F40EB2727C65F00E0D41A /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
+		190F40EF2727C68700E0D41A /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		190F40F12727C75500E0D41A /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		198AD69D2717D30400456A10 /* FirebaseProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseProcess.swift; sourceTree = "<group>"; };
 		19956042270C292300BBDC4B /* newShereCalender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = newShereCalender.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19956045270C292300BBDC4B /* newShereCalenderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newShereCalenderApp.swift; sourceTree = "<group>"; };
@@ -31,6 +45,8 @@
 		19956055270C337A00BBDC4B /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		19956057270C358D00BBDC4B /* HomeMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMenu.swift; sourceTree = "<group>"; };
 		19A6ED38270E84820062BB36 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		19BD2A122733613500AF5AD8 /* CalenderList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderList.swift; sourceTree = "<group>"; };
+		19BD2A14273361AE00AF5AD8 /* CalenderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderViewModel.swift; sourceTree = "<group>"; };
 		19F7FCA0270E99CD00224731 /* ProfileSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetting.swift; sourceTree = "<group>"; };
 		408A4C69E2FA6D58113C42C2 /* Pods_newShereCalender.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_newShereCalender.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A34B55CF36BCE18E1E70E45 /* Pods-newShereCalender.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newShereCalender.debug.xcconfig"; path = "Target Support Files/Pods-newShereCalender/Pods-newShereCalender.debug.xcconfig"; sourceTree = "<group>"; };
@@ -70,6 +86,8 @@
 		19956044270C292300BBDC4B /* newShereCalender */ = {
 			isa = PBXGroup;
 			children = (
+				19BD2A112733610000AF5AD8 /* Calender */,
+				190F40E32727C5C400E0D41A /* common-homebutton.swift */,
 				19956045270C292300BBDC4B /* newShereCalenderApp.swift */,
 				19956047270C292300BBDC4B /* ContentView.swift */,
 				19956055270C337A00BBDC4B /* LoginView.swift */,
@@ -77,6 +95,10 @@
 				19F7FCA0270E99CD00224731 /* ProfileSetting.swift */,
 				19956057270C358D00BBDC4B /* HomeMenu.swift */,
 				198AD69D2717D30400456A10 /* FirebaseProcess.swift */,
+				190F40EF2727C68700E0D41A /* SearchView.swift */,
+				190F40EB2727C65F00E0D41A /* AddView.swift */,
+				190F40F12727C75500E0D41A /* SettingView.swift */,
+				190F40E72727C64000E0D41A /* MemoView.swift */,
 				19956049270C292500BBDC4B /* Assets.xcassets */,
 				19956053270C2B1100BBDC4B /* GoogleService-Info.plist */,
 				1995604B270C292500BBDC4B /* Preview Content */,
@@ -90,6 +112,16 @@
 				1995604C270C292500BBDC4B /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		19BD2A112733610000AF5AD8 /* Calender */ = {
+			isa = PBXGroup;
+			children = (
+				190F40E92727C64F00E0D41A /* CalenderView.swift */,
+				19BD2A122733613500AF5AD8 /* CalenderList.swift */,
+				19BD2A14273361AE00AF5AD8 /* CalenderViewModel.swift */,
+			);
+			path = Calender;
 			sourceTree = "<group>";
 		};
 		958CBC0BCA31BF1E842643A1 /* Pods */ = {
@@ -139,7 +171,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1300;
-				LastUpgradeCheck = 1300;
+				LastUpgradeCheck = 1310;
 				TargetAttributes = {
 					19956041270C292300BBDC4B = {
 						CreatedOnToolsVersion = 13.0;
@@ -226,11 +258,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				19F7FCA1270E99CD00224731 /* ProfileSetting.swift in Sources */,
+				19BD2A132733613500AF5AD8 /* CalenderList.swift in Sources */,
+				190F40E82727C64000E0D41A /* MemoView.swift in Sources */,
 				19956056270C337A00BBDC4B /* LoginView.swift in Sources */,
 				19A6ED39270E84820062BB36 /* RegisterView.swift in Sources */,
+				190F40F02727C68700E0D41A /* SearchView.swift in Sources */,
 				19956048270C292300BBDC4B /* ContentView.swift in Sources */,
 				19956046270C292300BBDC4B /* newShereCalenderApp.swift in Sources */,
+				19BD2A15273361AE00AF5AD8 /* CalenderViewModel.swift in Sources */,
+				190F40EC2727C65F00E0D41A /* AddView.swift in Sources */,
+				190F40F22727C75500E0D41A /* SettingView.swift in Sources */,
+				190F40E42727C5C400E0D41A /* common-homebutton.swift in Sources */,
 				19956058270C358D00BBDC4B /* HomeMenu.swift in Sources */,
+				190F40EA2727C64F00E0D41A /* CalenderView.swift in Sources */,
 				198AD69E2717D30400456A10 /* FirebaseProcess.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -242,6 +282,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -303,6 +344,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
