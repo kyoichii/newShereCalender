@@ -27,9 +27,7 @@ struct HomeMenu: View {
             Spacer().frame(height: 50)
             //下に配置するボタンの表示
             HStack{
-                
                 common_homebutton(imagename: "calendar", textname: "カレンダー", fontred: 68, fontblue: 115, fontgreen: 210, backred: 172, backblue: 199, backgreen: 254)
-                    
                 common_homebutton(imagename: "square.and.pencil", textname: "メモ", fontred: 68, fontblue: 115, fontgreen: 210, backred: 172, backblue: 199, backgreen: 254)
                 common_homebutton(imagename: "plus", textname: "作成", fontred: 244, fontblue: 244, fontgreen: 244, backred: 26, backblue: 103, backgreen: 203)
                 common_homebutton(imagename: "globe", textname: "検索", fontred: 68, fontblue: 115, fontgreen: 210, backred: 172, backblue: 199, backgreen: 254)
