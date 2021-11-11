@@ -10,7 +10,6 @@ import Firebase
 
 // MARK: プロフィール設定画面
 struct ProfileSetting: View {
-    
     //各入力項目を格納させる変数
     @State var name = ""                        //名前
     @State private var selectionDate = Date()   //日付
@@ -82,9 +81,6 @@ struct ProfileSetting: View {
                     .background(Color.green)
                     .cornerRadius(10)
             })
-                .fullScreenCover(isPresented: $home) {
-                    LoginView()
-                }
         }
     }
     // MARK: ユーザー名などの登録処理
@@ -103,7 +99,8 @@ struct ProfileSetting: View {
             } else {
                 //データベース登録成功
                 print("成功!")
-                home.toggle()
+                //Sheetを閉じる処理
+                presentationMode.wrappedValue.dismiss()
                 UserDefaults.standard.set(true, forKey: "status")   //キーバリュー変更
                 NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
             }

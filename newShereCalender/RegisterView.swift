@@ -65,8 +65,6 @@ struct RegisterView: View {
             Button(action:{
                 //アカウント作成ボタンクリック処理
                 verify()
-                //Sheetを閉じる処理
-                presentationMode.wrappedValue.dismiss()
             }, label: {
                 Text("アカウントを作成する")
                     .frame(width:300, height: 30)

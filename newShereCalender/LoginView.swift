@@ -44,7 +44,6 @@ enum AlertType{
 
 // MARK: ログイン画面
 struct Login: View{
-    
     //各入力項目を格納させるための変数
     @State var email = ""   //メールアドレス
     @State var pass = ""    //パスワード
