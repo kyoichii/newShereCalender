@@ -86,13 +86,11 @@
 		19956044270C292300BBDC4B /* newShereCalender */ = {
 			isa = PBXGroup;
 			children = (
+				19F49347273CBB6C00DBFD23 /* Login Connection */,
 				19BD2A112733610000AF5AD8 /* Calender */,
 				190F40E32727C5C400E0D41A /* common-homebutton.swift */,
 				19956045270C292300BBDC4B /* newShereCalenderApp.swift */,
 				19956047270C292300BBDC4B /* ContentView.swift */,
-				19956055270C337A00BBDC4B /* LoginView.swift */,
-				19A6ED38270E84820062BB36 /* RegisterView.swift */,
-				19F7FCA0270E99CD00224731 /* ProfileSetting.swift */,
 				19956057270C358D00BBDC4B /* HomeMenu.swift */,
 				198AD69D2717D30400456A10 /* FirebaseProcess.swift */,
 				190F40EF2727C68700E0D41A /* SearchView.swift */,
@@ -122,6 +120,16 @@
 				19BD2A14273361AE00AF5AD8 /* CalenderViewModel.swift */,
 			);
 			path = Calender;
+			sourceTree = "<group>";
+		};
+		19F49347273CBB6C00DBFD23 /* Login Connection */ = {
+			isa = PBXGroup;
+			children = (
+				19956055270C337A00BBDC4B /* LoginView.swift */,
+				19A6ED38270E84820062BB36 /* RegisterView.swift */,
+				19F7FCA0270E99CD00224731 /* ProfileSetting.swift */,
+			);
+			path = "Login Connection";
 			sourceTree = "<group>";
 		};
 		958CBC0BCA31BF1E842643A1 /* Pods */ = {

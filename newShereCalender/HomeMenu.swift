@@ -6,33 +6,48 @@
 //
 
 import SwiftUI
+import Firebase
 
+//MARK: ホーム画面
 struct HomeMenu: View {
+    @State var isOpenSideMenu: Bool = false //スライドバーのフラグ
+    @State var user:String = ""
+    //databeseに接続
+    let db = Firestore.firestore()
+    // ログインしているユーザーのUIDを取得
+    let userID = Auth.auth().currentUser!.uid
+    
     var body: some View {
-        VStack{
-            HStack {
-                Button(action:{
-                    // ボタンをタップするとドロワーを開く
-                }) {
-                    Image(systemName: "list.bullet")
-                        .foregroundColor(Color.init(red: 68/255, green: 210/255, blue: 115/255))
-                        .font(.system(size:17))
+        ZStack {
+            VStack{
+                HStack {
+                    Button(action:{
+                        // ボタンをタップするとドロワーを開く
+                        self.isOpenSideMenu.toggle()
+                    }) {
+                        Image(systemName: "list.bullet")
+                            .foregroundColor(Color.init(red: 68/255, green: 210/255, blue: 115/255))
+                            .font(.system(size:17))
+                    }
+                    Spacer()
+                    Text("カレンダー").padding().font(.system(size:20))
+                    Spacer()
+                }.padding()
+                Spacer()
+                CalenderView()
+                Spacer().frame(height: 50)
+                //下に配置するボタンの表示
+                HStack{
+                    common_homebutton(imagename: "calendar", textname: "カレンダー", fontred: 68, fontblue: 115, fontgreen: 210, backred: 172, backblue: 199, backgreen: 254)
+                    common_homebutton(imagename: "square.and.pencil", textname: "メモ", fontred: 68, fontblue: 115, fontgreen: 210, backred: 172, backblue: 199, backgreen: 254)
+                    common_homebutton(imagename: "plus", textname: "作成", fontred: 244, fontblue: 244, fontgreen: 244, backred: 26, backblue: 103, backgreen: 203)
+                    common_homebutton(imagename: "globe", textname: "検索", fontred: 68, fontblue: 115, fontgreen: 210, backred: 172, backblue: 199, backgreen: 254)
+                    common_homebutton(imagename: "gearshape", textname: "設定", fontred: 68, fontblue: 115, fontgreen: 210, backred: 172, backblue: 199, backgreen: 254)
                 }
-                Spacer()
-                Text("カレンダー").padding().font(.system(size:20))
-                Spacer()
-            }.padding()
-            Spacer()
-            CalenderView()
-            Spacer().frame(height: 50)
-            //下に配置するボタンの表示
-            HStack{
-                common_homebutton(imagename: "calendar", textname: "カレンダー", fontred: 68, fontblue: 115, fontgreen: 210, backred: 172, backblue: 199, backgreen: 254)
-                common_homebutton(imagename: "square.and.pencil", textname: "メモ", fontred: 68, fontblue: 115, fontgreen: 210, backred: 172, backblue: 199, backgreen: 254)
-                common_homebutton(imagename: "plus", textname: "作成", fontred: 244, fontblue: 244, fontgreen: 244, backred: 26, backblue: 103, backgreen: 203)
-                common_homebutton(imagename: "globe", textname: "検索", fontred: 68, fontblue: 115, fontgreen: 210, backred: 172, backblue: 199, backgreen: 254)
-                common_homebutton(imagename: "gearshape", textname: "設定", fontred: 68, fontblue: 115, fontgreen: 210, backred: 172, backblue: 199, backgreen: 254)
             }
+            //スライドバーの表示・非表示を制御する
+            SideMenu(isOpen: $isOpenSideMenu)
+                .edgesIgnoringSafeArea(.all)
         }
     }
 }
@@ -40,5 +55,39 @@ struct HomeMenu: View {
 struct HomeMenu_Previews: PreviewProvider {
     static var previews: some View {
         HomeMenu()
+    }
+}
+
+//MARK: スライドバー実装
+struct SideMenu: View{
+    @Binding var isOpen:Bool    //サイドメニューが開いているか
+    //スライドバーのサイズ指定
+    let width: CGFloat = 300
+    
+    var body: some View{
+        ZStack{
+            //背景部分
+            GeometryReader { geometry in
+                EmptyView()
+            }
+            .background(Color.gray.opacity(0.3))
+            .opacity(self.isOpen ? 1.0 : 0.0)
+            .opacity(1.0)
+            .animation(.easeIn(duration: 0.25))
+            .onTapGesture {
+                self.isOpen = false
+            }
+            // リスト部分
+            HStack {
+                VStack{
+                    Spacer()
+                }
+                .frame(width: width)
+                .background(Color(UIColor.systemGray6))
+                .offset(x: self.isOpen ? 0 : -self.width)
+                .animation(.easeIn(duration: 0.25))
+                Spacer()
+            }
+        }
     }
 }
