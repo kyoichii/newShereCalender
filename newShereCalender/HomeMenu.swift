@@ -11,7 +11,8 @@ import Firebase
 //MARK: ホーム画面
 struct HomeMenu: View {
     @State var isOpenSideMenu: Bool = false //スライドバーのフラグ
-    @State var user:String = ""
+    @State private var user = ""
+    
     //databeseに接続
     let db = Firestore.firestore()
     // ログインしているユーザーのUIDを取得
@@ -24,6 +25,14 @@ struct HomeMenu: View {
                     Button(action:{
                         // ボタンをタップするとドロワーを開く
                         self.isOpenSideMenu.toggle()
+                        db.collection("user").document("\(userID)").getDocument { (snap, error) in
+                            if let error = error {
+                                fatalError("\(error)")
+                            }
+                            guard let data = snap?.data() else { return }
+                            print(data["name"]!)
+                            user = data["name"]! as! String
+                        }
                     }) {
                         Image(systemName: "list.bullet")
                             .foregroundColor(Color.init(red: 68/255, green: 210/255, blue: 115/255))
@@ -46,7 +55,7 @@ struct HomeMenu: View {
                 }
             }
             //スライドバーの表示・非表示を制御する
-            SideMenu(isOpen: $isOpenSideMenu)
+            SideMenu(isOpen: $isOpenSideMenu, username: $user)
                 .edgesIgnoringSafeArea(.all)
         }
     }
@@ -61,6 +70,7 @@ struct HomeMenu_Previews: PreviewProvider {
 //MARK: スライドバー実装
 struct SideMenu: View{
     @Binding var isOpen:Bool    //サイドメニューが開いているか
+    @Binding var username:String
     //スライドバーのサイズ指定
     let width: CGFloat = 300
     
@@ -80,6 +90,8 @@ struct SideMenu: View{
             // リスト部分
             HStack {
                 VStack{
+                    Spacer().frame(height: 5)
+                    Text(username)
                     Spacer()
                 }
                 .frame(width: width)
