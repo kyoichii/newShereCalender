@@ -12,6 +12,7 @@ import Firebase
 struct HomeMenu: View {
     @State var isOpenSideMenu: Bool = false //スライドバーのフラグ
     @State private var user = ""
+    @State private var birthday = ""
     
     //databeseに接続
     let db = Firestore.firestore()
@@ -25,13 +26,16 @@ struct HomeMenu: View {
                     Button(action:{
                         // ボタンをタップするとドロワーを開く
                         self.isOpenSideMenu.toggle()
+                        //データベースアクセス。値を代入
                         db.collection("user").document("\(userID)").getDocument { (snap, error) in
                             if let error = error {
                                 fatalError("\(error)")
                             }
                             guard let data = snap?.data() else { return }
                             print(data["name"]!)
+                            print(data["birthday"]!)
                             user = data["name"]! as! String
+                            birthday = data["birthday"] as! String
                         }
                     }) {
                         Image(systemName: "list.bullet")
@@ -44,33 +48,47 @@ struct HomeMenu: View {
                 }.padding()
                 Spacer()
                 CalenderView()
-                Spacer().frame(height: 50)
-                //下に配置するボタンの表示
-                HStack{
-                    common_homebutton(imagename: "calendar", textname: "カレンダー", fontred: 68, fontblue: 115, fontgreen: 210, backred: 172, backblue: 199, backgreen: 254)
-                    common_homebutton(imagename: "square.and.pencil", textname: "メモ", fontred: 68, fontblue: 115, fontgreen: 210, backred: 172, backblue: 199, backgreen: 254)
-                    common_homebutton(imagename: "plus", textname: "作成", fontred: 244, fontblue: 244, fontgreen: 244, backred: 26, backblue: 103, backgreen: 203)
-                    common_homebutton(imagename: "globe", textname: "検索", fontred: 68, fontblue: 115, fontgreen: 210, backred: 172, backblue: 199, backgreen: 254)
-                    common_homebutton(imagename: "gearshape", textname: "設定", fontred: 68, fontblue: 115, fontgreen: 210, backred: 172, backblue: 199, backgreen: 254)
-                }
+                Spacer().frame(height: 70)
             }
+            FloatingButton()
             //スライドバーの表示・非表示を制御する
-            SideMenu(isOpen: $isOpenSideMenu, username: $user)
+            SideMenu(isOpen: $isOpenSideMenu, username: $user, birthday: $birthday)
                 .edgesIgnoringSafeArea(.all)
         }
     }
 }
 
-struct HomeMenu_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeMenu()
+//MARK: ホーム画面右下のボタン
+struct FloatingButton: View {
+    
+    var body: some View {
+        VStack {
+            Spacer()
+            HStack {
+                Spacer()
+                Button(action: {
+                    print("Tapped!!")
+                }, label: {
+                    Image(systemName: "plus")
+                        .foregroundColor(.white)
+                        .font(.system(size: 24))
+                })
+                .frame(width: 60, height: 60)
+                .background(Color(red: 66/255, green: 237/255, blue: 51/255, opacity: 0.5))
+                .cornerRadius(30.0)
+                .shadow(color: .gray, radius: 3, x: 3, y: 3)
+                .padding(EdgeInsets(top: 0, leading: 0, bottom: 16.0, trailing: 16.0))
+            }
+        }
     }
 }
 
 //MARK: スライドバー実装
 struct SideMenu: View{
-    @Binding var isOpen:Bool    //サイドメニューが開いているか
-    @Binding var username:String
+    @Binding var isOpen:Bool        //サイドメニューが開いているか
+    @Binding var username:String    //ユーザ名が格納
+    @Binding var birthday:String    //誕生日が格納
+    @State var settingview = false  //設定ビューを開くための設定
     //スライドバーのサイズ指定
     let width: CGFloat = 300
     
@@ -90,9 +108,52 @@ struct SideMenu: View{
             // リスト部分
             HStack {
                 VStack{
-                    Spacer().frame(height: 5)
-                    Text(username)
+                    //ユーザ名及び設定ボタンデザイン
+                    HStack {
+                        Spacer().frame(width: 25)
+                        VStack{
+                            Spacer()
+                            //ユーザ名
+                            Text("\(username)")
+                                .foregroundColor(Color.white)
+                                .font(.system(size: 28))
+                            //誕生日
+                            Text("\(birthday)")
+                                .foregroundColor(Color.white)
+                                .font(.system(size: 15))
+                            Spacer().frame(height: 7)
+                        }
+                        Spacer()
+                        VStack{
+                            Spacer()
+                            Button(action: {
+                                settingview.toggle()  //settingviewのflag変更
+                            }, label: {
+                                Image(systemName: "gearshape")
+                                    .foregroundColor(Color.white)
+                                    .font(.system(size: 30))
+                            }).sheet(isPresented: $settingview){
+                                SettingView(username: $username, birthday: $birthday)
+                            }.padding()
+                        }
+                        Spacer().frame(width:20)
+                    }
+                    .frame(width: width, height: 125)
+                    .background(Color(red: 66/255, green: 237/255, blue: 51/255, opacity: 0.7))
+                    Spacer().frame(height: 25)
+                    //メモ帳を開くボタン
+                    HStack{
+                        Button(action: {
+                            print("メモ帳ボタンクリック")
+                        }, label: {
+                            Text("メモ帳")
+                            Spacer().frame(width: 30)
+                            Image(systemName: "square.and.pencil")
+                                .font(.system(size: 25))
+                        }).foregroundColor(Color.black)
+                    }
                     Spacer()
+                    
                 }
                 .frame(width: width)
                 .background(Color(UIColor.systemGray6))
@@ -101,5 +162,13 @@ struct SideMenu: View{
                 Spacer()
             }
         }
+    }
+}
+
+//プレビュー
+struct HomeMenu_Previews: PreviewProvider {
+    static var previews: some View {
+        FloatingButton()
+        SideMenu(isOpen: .constant(true), username: .constant("ユーザ名"), birthday: .constant("誕生日"))
     }
 }
