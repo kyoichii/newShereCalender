@@ -14,6 +14,7 @@ struct SettingView: View {
     @State var profileeditflag: Bool = false    //プロフィール編集画面表示フラグ
     @State var logoutalert: Bool = false        //ログアウトアラート表示フラグ
     @State var accountdeletealert: Bool = false //アカウント削除アラート表示フラグ
+    @State var changeprofile: Bool = false      //プロフィール変更表示アラート
     @Binding var username:String                //ユーザ名が格納
     @Binding var birthday:String                //誕生日が格納
     var body: some View {
@@ -31,11 +32,14 @@ struct SettingView: View {
                 })
                 Spacer()
                 Button("編集"){
-                    
+                    changeprofile.toggle()
                 }
                 .padding()
                 .font(.system(size: 23))
                 .foregroundColor(.black)
+                .sheet(isPresented: $changeprofile){
+                    ChangeProfileVuew()
+                }
             }
             Spacer()
             //現在ログインしているユーザー名と誕生日を表示する

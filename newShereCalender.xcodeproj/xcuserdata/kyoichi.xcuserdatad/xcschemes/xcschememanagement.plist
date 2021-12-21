@@ -3,11 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>SchemeUserState</key>
+	<dict/>
+	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>newShereCalender.xcscheme_^#shared#^_</key>
+		<key>19956041270C292300BBDC4B</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>20</integer>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
