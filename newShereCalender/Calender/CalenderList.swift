@@ -53,9 +53,11 @@ struct CalendarList: View {
                         ZStack(alignment: .top){
                             RoundedRectangle(cornerRadius: 5).frame(width:50,height:90)
                                 .foregroundColor(Color.clear)
-                            Text("\(index+1)")
-                                .font(.system(size: 20))
-                                .foregroundColor(.blue)
+                            Button("\(index+1)"){
+                                print("\(month)月\(index + 1)日")
+                            }
+                            .font(.system(size: 20))
+                            .foregroundColor(.black)
                             
                         }
                     }
@@ -67,9 +69,11 @@ struct CalendarList: View {
                         ZStack(alignment: .top){
                             RoundedRectangle(cornerRadius: 5).frame(width:50,height:112.5)
                                 .foregroundColor(Color.clear)
-                            Text("\((self.column-self.startdaynumber)+1+index)")
-                                .font(.system(size: 20))
-                                .foregroundColor(.black)
+                            Button("\((self.column-self.startdaynumber)+1+index)"){
+                                print("\(month)月\((self.column-self.startdaynumber)+1+index)日")
+                            }
+                            .font(.system(size: 20))
+                            .foregroundColor(.black)
                         }
                     }
                 }
@@ -80,9 +84,11 @@ struct CalendarList: View {
                         ZStack(alignment: .top){
                             RoundedRectangle(cornerRadius: 5).frame(width:50,height:112.5)
                                 .foregroundColor(Color.clear)
-                            Text("\(((7-self.startdaynumber)+1+index)+7)")
-                                .font(.system(size: 20))
-                                .foregroundColor(.black)
+                            Button("\(((7-self.startdaynumber)+1+index)+7)"){
+                                print("\(month)月\(((7-self.startdaynumber)+1+index)+7)日")
+                            }
+                            .font(.system(size: 20))
+                            .foregroundColor(.black)
                         }
                     }
                 }
@@ -94,9 +100,11 @@ struct CalendarList: View {
                             ZStack(alignment: .top){
                                 RoundedRectangle(cornerRadius: 5).frame(width:50,height:112.5)
                                     .foregroundColor(Color.clear)
-                                Text("\(((7-self.startdaynumber)+1+index)+14)")
-                                    .font(.system(size: 20))
-                                    .foregroundColor(.black)
+                                Button("\(((7-self.startdaynumber)+1+index)+14)"){
+                                    print("\(month)月\(((7-self.startdaynumber)+1+index)+14)日")
+                                }
+                                .font(.system(size: 20))
+                                .foregroundColor(.black)
                             }
                             Divider()       // 仕切り線の挿入
                         }
@@ -106,9 +114,11 @@ struct CalendarList: View {
                             ZStack(alignment: .top){
                                 RoundedRectangle(cornerRadius: 5).frame(width:50,height:112.5)
                                     .foregroundColor(Color.clear)
-                                Text("\(((7-self.startdaynumber)+1+index)+14)")
-                                    .font(.system(size: 20))
-                                    .foregroundColor(.black)
+                                Button("\(((7-self.startdaynumber)+1+index)+14)"){
+                                    print("\(month)月\(((7-self.startdaynumber)+1+index)+14)日")
+                                }
+                                .font(.system(size: 20))
+                                .foregroundColor(.black)
                             }
                         }
                         Divider()       // 仕切り線の挿入
@@ -139,9 +149,12 @@ struct CalendarList: View {
                         ZStack(alignment: .top){
                             RoundedRectangle(cornerRadius: 5).frame(width:50,height:90)
                                 .foregroundColor(Color.clear)
-                            Text("\(index+1)")
-                                .font(.system(size: 20))
-                                .foregroundColor(.black)
+                            
+                            Button("\(index+1)"){
+                                print("\(month)月\(index + 1)日")
+                            }
+                            .font(.system(size: 20))
+                            .foregroundColor(.black)
                             
                         }
                     }
@@ -153,9 +166,11 @@ struct CalendarList: View {
                         ZStack(alignment: .top){
                             RoundedRectangle(cornerRadius: 5).frame(width:50,height:90)
                                 .foregroundColor(Color.clear)
-                            Text("\((self.column-self.startdaynumber)+1+index)")
-                                .font(.system(size: 20))
-                                .foregroundColor(.black)
+                            Button("\((self.column-self.startdaynumber)+1+index)"){
+                                print("\(month)月\((self.column-self.startdaynumber)+1+index)日")
+                            }
+                            .font(.system(size: 20))
+                            .foregroundColor(.black)
                         }
                     }
                 }
@@ -166,9 +181,11 @@ struct CalendarList: View {
                         ZStack(alignment: .top){
                             RoundedRectangle(cornerRadius: 5).frame(width:50,height:90)
                                 .foregroundColor(Color.clear)
-                            Text("\(((7-self.startdaynumber)+1+index)+7)")
-                                .font(.system(size: 20))
-                                .foregroundColor(.black)
+                            Button("\(((7-self.startdaynumber)+1+index)+7)"){
+                                print("\(month)月\(((7-self.startdaynumber)+1+index)+7)日")
+                            }
+                            .font(.system(size: 20))
+                            .foregroundColor(.black)
                         }
                     }
                 }
@@ -179,9 +196,11 @@ struct CalendarList: View {
                         ZStack(alignment: .top){
                             RoundedRectangle(cornerRadius: 5).frame(width:50,height:90)
                                 .foregroundColor(Color.clear)
-                            Text("\(((7-self.startdaynumber)+1+index)+14)")
-                                .font(.system(size: 20))
-                                .foregroundColor(.black)
+                            Button("\(((7-self.startdaynumber)+1+index)+14)"){
+                                print("\(month)月\(((7-self.startdaynumber)+1+index)+14)日")
+                            }
+                            .font(.system(size: 20))
+                            .foregroundColor(.black)
                         }
                         
                     }
@@ -215,9 +234,11 @@ struct CalendarList: View {
                             ZStack(alignment: .top){
                                 RoundedRectangle(cornerRadius: 5).frame(width:50,height:90)
                                     .foregroundColor(Color.clear)
-                                Text("\(((7-self.startdaynumber)+1+index)+21)")
-                                    .font(.system(size: 20))
-                                    .foregroundColor(.black)
+                                Button("\(((7-self.startdaynumber)+1+index)+21)"){
+                                    print("\(month)月\(((7-self.startdaynumber)+1+index)+21)日")
+                                }
+                                .font(.system(size: 20))
+                                .foregroundColor(.black)
                             }
                             
                         }
@@ -247,9 +268,11 @@ struct CalendarList: View {
                             ZStack(alignment: .top){
                                 RoundedRectangle(cornerRadius: 5).frame(width:50,height:75)
                                     .foregroundColor(Color.clear)
-                                Text("\(index+1)")
-                                    .font(.system(size: 20))
-                                    .foregroundColor(.black)
+                                Button("\(index+1)"){
+                                    print("\(month)月\(index + 1)日")
+                                }
+                                .font(.system(size: 20))
+                                .foregroundColor(.black)
                             }
                         }
                     }
@@ -260,9 +283,11 @@ struct CalendarList: View {
                             ZStack(alignment: .top){
                                 RoundedRectangle(cornerRadius: 5).frame(width:50,height:75)
                                     .foregroundColor(Color.clear)
-                                Text("\((self.column-self.startdaynumber)+1+index)")
-                                    .font(.system(size: 20))
-                                    .foregroundColor(.black)
+                                Button("\((self.column-self.startdaynumber)+1+index)"){
+                                    print("\(month)月\((self.column-self.startdaynumber)+1+index)日")
+                                }
+                                .font(.system(size: 20))
+                                .foregroundColor(.black)
                             }
                         }
                     }
@@ -273,9 +298,11 @@ struct CalendarList: View {
                             ZStack(alignment: .top){
                                 RoundedRectangle(cornerRadius: 5).frame(width:50,height:75)
                                     .foregroundColor(Color.clear)
-                                Text("\(((7-self.startdaynumber)+1+index)+7)")
-                                    .font(.system(size: 20))
-                                    .foregroundColor(.black)
+                                Button("\(((7-self.startdaynumber)+1+index)+7)"){
+                                    print("\(month)月\(((7-self.startdaynumber)+1+index)+7)日")
+                                }
+                                .font(.system(size: 20))
+                                .foregroundColor(.black)
                             }
                         }
                     }
@@ -288,9 +315,11 @@ struct CalendarList: View {
                             ZStack(alignment: .top){
                                 RoundedRectangle(cornerRadius: 5).frame(width:50,height:75)
                                     .foregroundColor(Color.clear)
-                                Text("\(((7-self.startdaynumber)+1+index)+14)")
-                                    .font(.system(size: 20))
-                                    .foregroundColor(.black)
+                                Button("\(((7-self.startdaynumber)+1+index)+14)"){
+                                    print("\(month)月\(((7-self.startdaynumber)+1+index)+14)日")
+                                }
+                                .font(.system(size: 20))
+                                .foregroundColor(.black)
                             }
                         }
                     }
@@ -301,9 +330,11 @@ struct CalendarList: View {
                             ZStack(alignment: .top){
                                 RoundedRectangle(cornerRadius: 5).frame(width:50,height:75)
                                     .foregroundColor(Color.clear)
-                                Text("\(((7-self.startdaynumber)+1+index)+21)")
-                                    .font(.system(size: 20))
-                                    .foregroundColor(.black)
+                                Button("\(((7-self.startdaynumber)+1+index)+21)"){
+                                    print("\(month)月\(((7-self.startdaynumber)+1+index)+21)日")
+                                }
+                                .font(.system(size: 20))
+                                .foregroundColor(.black)
                             }
                         }
                     }
@@ -315,9 +346,11 @@ struct CalendarList: View {
                                 ZStack(alignment: .top){
                                     RoundedRectangle(cornerRadius: 5).frame(width:50,height:75)
                                         .foregroundColor(Color.clear)
-                                    Text("\(((7-self.startdaynumber)+1+index)+28)")
-                                        .font(.system(size: 20))
-                                        .foregroundColor(.black)
+                                    Button("\(((7-self.startdaynumber)+1+index)+28)"){
+                                        print("\(month)月\(((7-self.startdaynumber)+1+index)+28)日")
+                                    }
+                                    .font(.system(size: 20))
+                                    .foregroundColor(.black)
                                 }
                             }
                             if self.lastweeknumber != 0{
@@ -336,9 +369,11 @@ struct CalendarList: View {
                                 ZStack(alignment: .top){
                                     RoundedRectangle(cornerRadius: 5).frame(width:50,height:75)
                                         .foregroundColor(Color.clear)
-                                    Text("\(((7-self.startdaynumber)+1+index)+28)")
-                                        .font(.system(size: 20))
-                                        .foregroundColor(.black)
+                                    Button("\(((7-self.startdaynumber)+1+index)+28)"){
+                                        print("\(month)月\(((7-self.startdaynumber)+1+index)+28)日")
+                                    }
+                                    .font(.system(size: 20))
+                                    .foregroundColor(.black)
                                 }
                             }
                         }

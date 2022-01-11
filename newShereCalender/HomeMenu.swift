@@ -60,7 +60,7 @@ struct HomeMenu: View {
 
 //MARK: ホーム画面右下のボタン
 struct FloatingButton: View {
-    
+    @State var addview = false
     var body: some View {
         VStack {
             Spacer()
@@ -68,6 +68,8 @@ struct FloatingButton: View {
                 Spacer()
                 Button(action: {
                     print("Tapped!!")
+                    addview.toggle()
+                    
                 }, label: {
                     Image(systemName: "plus")
                         .foregroundColor(.white)
@@ -78,6 +80,9 @@ struct FloatingButton: View {
                 .cornerRadius(30.0)
                 .shadow(color: .gray, radius: 3, x: 3, y: 3)
                 .padding(EdgeInsets(top: 0, leading: 0, bottom: 16.0, trailing: 16.0))
+                .sheet(isPresented: $addview){
+                    AddView()
+                }
             }
         }
     }
