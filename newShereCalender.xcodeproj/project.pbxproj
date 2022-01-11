@@ -13,6 +13,7 @@
 		190F40EC2727C65F00E0D41A /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190F40EB2727C65F00E0D41A /* AddView.swift */; };
 		190F40F22727C75500E0D41A /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190F40F12727C75500E0D41A /* SettingView.swift */; };
 		191D0BD52756865D00CF19D4 /* HomeMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D0BD42756865D00CF19D4 /* HomeMenu.swift */; };
+		19304A4A2786706B003474BD /* ChangeDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19304A492786706B003474BD /* ChangeDateView.swift */; };
 		19956046270C292300BBDC4B /* newShereCalenderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19956045270C292300BBDC4B /* newShereCalenderApp.swift */; };
 		19956048270C292300BBDC4B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19956047270C292300BBDC4B /* ContentView.swift */; };
 		1995604A270C292500BBDC4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19956049270C292500BBDC4B /* Assets.xcassets */; };
@@ -22,7 +23,6 @@
 		19A6ED39270E84820062BB36 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A6ED38270E84820062BB36 /* RegisterView.swift */; };
 		19BD2A132733613500AF5AD8 /* CalenderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BD2A122733613500AF5AD8 /* CalenderList.swift */; };
 		19BD2A15273361AE00AF5AD8 /* CalenderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BD2A14273361AE00AF5AD8 /* CalenderViewModel.swift */; };
-		19DB4FF32771B40100D1228E /* ChangeProfileVuew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DB4FF22771B40100D1228E /* ChangeProfileVuew.swift */; };
 		19F7FCA1270E99CD00224731 /* ProfileSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F7FCA0270E99CD00224731 /* ProfileSetting.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +32,7 @@
 		190F40EB2727C65F00E0D41A /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		190F40F12727C75500E0D41A /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		191D0BD42756865D00CF19D4 /* HomeMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMenu.swift; sourceTree = "<group>"; };
+		19304A492786706B003474BD /* ChangeDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeDateView.swift; sourceTree = "<group>"; };
 		19956042270C292300BBDC4B /* newShereCalender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = newShereCalender.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19956045270C292300BBDC4B /* newShereCalenderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newShereCalenderApp.swift; sourceTree = "<group>"; };
 		19956047270C292300BBDC4B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -42,7 +43,6 @@
 		19A6ED38270E84820062BB36 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		19BD2A122733613500AF5AD8 /* CalenderList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderList.swift; sourceTree = "<group>"; };
 		19BD2A14273361AE00AF5AD8 /* CalenderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderViewModel.swift; sourceTree = "<group>"; };
-		19DB4FF22771B40100D1228E /* ChangeProfileVuew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeProfileVuew.swift; sourceTree = "<group>"; };
 		19F7FCA0270E99CD00224731 /* ProfileSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetting.swift; sourceTree = "<group>"; };
 		408A4C69E2FA6D58113C42C2 /* Pods_newShereCalender.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_newShereCalender.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A34B55CF36BCE18E1E70E45 /* Pods-newShereCalender.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newShereCalender.debug.xcconfig"; path = "Target Support Files/Pods-newShereCalender/Pods-newShereCalender.debug.xcconfig"; sourceTree = "<group>"; };
@@ -85,9 +85,9 @@
 				19F49347273CBB6C00DBFD23 /* Login Connection */,
 				19BD2A112733610000AF5AD8 /* Calender */,
 				190F40EB2727C65F00E0D41A /* AddView.swift */,
+				19304A492786706B003474BD /* ChangeDateView.swift */,
 				190F40E72727C64000E0D41A /* MemoView.swift */,
 				19956045270C292300BBDC4B /* newShereCalenderApp.swift */,
-				19DB4FF22771B40100D1228E /* ChangeProfileVuew.swift */,
 				190F40F12727C75500E0D41A /* SettingView.swift */,
 				19956047270C292300BBDC4B /* ContentView.swift */,
 				191D0BD42756865D00CF19D4 /* HomeMenu.swift */,
@@ -262,7 +262,6 @@
 				191D0BD52756865D00CF19D4 /* HomeMenu.swift in Sources */,
 				19F7FCA1270E99CD00224731 /* ProfileSetting.swift in Sources */,
 				19BD2A132733613500AF5AD8 /* CalenderList.swift in Sources */,
-				19DB4FF32771B40100D1228E /* ChangeProfileVuew.swift in Sources */,
 				190F40E82727C64000E0D41A /* MemoView.swift in Sources */,
 				19956056270C337A00BBDC4B /* LoginView.swift in Sources */,
 				19A6ED39270E84820062BB36 /* RegisterView.swift in Sources */,
@@ -271,6 +270,7 @@
 				19BD2A15273361AE00AF5AD8 /* CalenderViewModel.swift in Sources */,
 				190F40EC2727C65F00E0D41A /* AddView.swift in Sources */,
 				190F40F22727C75500E0D41A /* SettingView.swift in Sources */,
+				19304A4A2786706B003474BD /* ChangeDateView.swift in Sources */,
 				190F40EA2727C64F00E0D41A /* CalenderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -38,7 +38,7 @@ struct SettingView: View {
                 .font(.system(size: 23))
                 .foregroundColor(.black)
                 .sheet(isPresented: $changeprofile){
-                    ChangeProfileVuew()
+                    ChangeDateView(username: $username)
                 }
             }
             Spacer()
