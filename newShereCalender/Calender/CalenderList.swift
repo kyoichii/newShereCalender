@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseDatabase
 
 struct CalendarList: View {
     @Binding var year : Int
@@ -18,6 +20,10 @@ struct CalendarList: View {
     let column = 7
     let int = 1
     
+    @State var yotei = ""
+    
+    // ログインしているユーザーのUIDを取得
+    let userID = Auth.auth().currentUser!.uid
     
     
     init(year:Binding<Int>,month:Binding<Int>,week:Int,start:Int,days:Int){
@@ -29,6 +35,10 @@ struct CalendarList: View {
         self.middleweek = (days - (7 - start)) / 7
         self.lastweeknumber = (days - (7 - start)) % 7  //各月の最終週が格納されている変数
     }
+    
+    //予定ビューを表示するためのフラグ
+    @State var yoteiview = false
+    @State var date = ""
     
     var body: some View {
         //MARK: 月が4週の場合
@@ -54,10 +64,15 @@ struct CalendarList: View {
                             RoundedRectangle(cornerRadius: 5).frame(width:50,height:90)
                                 .foregroundColor(Color.clear)
                             Button("\(index+1)"){
-                                print("\(month)月\(index + 1)日")
+                                date = "\(year)年\(month)月\(index + 1)日"
+                                getData(date: String(date))   //データ取得
+                                yoteiview.toggle()
                             }
                             .font(.system(size: 20))
                             .foregroundColor(.black)
+                            .sheet(isPresented:$yoteiview){
+                                YoteiView(date: $date, yotei: $yotei)
+                            }
                             
                         }
                     }
@@ -70,10 +85,15 @@ struct CalendarList: View {
                             RoundedRectangle(cornerRadius: 5).frame(width:50,height:112.5)
                                 .foregroundColor(Color.clear)
                             Button("\((self.column-self.startdaynumber)+1+index)"){
-                                print("\(month)月\((self.column-self.startdaynumber)+1+index)日")
+                                date = "\(year)年\(month)月\((self.column-self.startdaynumber)+1+index)日"
+                                getData(date: String(date))   //データ取得
+                                yoteiview.toggle()
                             }
                             .font(.system(size: 20))
                             .foregroundColor(.black)
+                            .sheet(isPresented:$yoteiview){
+                                YoteiView(date: $date, yotei: $yotei)
+                            }
                         }
                     }
                 }
@@ -85,10 +105,15 @@ struct CalendarList: View {
                             RoundedRectangle(cornerRadius: 5).frame(width:50,height:112.5)
                                 .foregroundColor(Color.clear)
                             Button("\(((7-self.startdaynumber)+1+index)+7)"){
-                                print("\(month)月\(((7-self.startdaynumber)+1+index)+7)日")
+                                date = "\(year)年\(month)月\(((7-self.startdaynumber)+1+index)+7)日"
+                                getData(date: String(date))   //データ取得
+                                yoteiview.toggle()
                             }
                             .font(.system(size: 20))
                             .foregroundColor(.black)
+                            .sheet(isPresented:$yoteiview){
+                                YoteiView(date:$date, yotei: $yotei)
+                            }
                         }
                     }
                 }
@@ -101,10 +126,15 @@ struct CalendarList: View {
                                 RoundedRectangle(cornerRadius: 5).frame(width:50,height:112.5)
                                     .foregroundColor(Color.clear)
                                 Button("\(((7-self.startdaynumber)+1+index)+14)"){
-                                    print("\(month)月\(((7-self.startdaynumber)+1+index)+14)日")
+                                    date = "\(year)年\(month)月\(((7-self.startdaynumber)+1+index)+14)日"
+                                    getData(date: String(date))   //データ取得
+                                    yoteiview.toggle()
                                 }
                                 .font(.system(size: 20))
                                 .foregroundColor(.black)
+                                .sheet(isPresented:$yoteiview){
+                                    YoteiView(date:$date, yotei: $yotei)
+                                }
                             }
                             Divider()       // 仕切り線の挿入
                         }
@@ -115,10 +145,15 @@ struct CalendarList: View {
                                 RoundedRectangle(cornerRadius: 5).frame(width:50,height:112.5)
                                     .foregroundColor(Color.clear)
                                 Button("\(((7-self.startdaynumber)+1+index)+14)"){
-                                    print("\(month)月\(((7-self.startdaynumber)+1+index)+14)日")
+                                    date = "\(year)年\(month)月\(((7-self.startdaynumber)+1+index)+14)日"
+                                    getData(date: String(date))   //データ取得
+                                    yoteiview.toggle()
                                 }
                                 .font(.system(size: 20))
                                 .foregroundColor(.black)
+                                .sheet(isPresented:$yoteiview){
+                                    YoteiView(date:$date, yotei: $yotei)
+                                }
                             }
                         }
                         Divider()       // 仕切り線の挿入
@@ -128,9 +163,8 @@ struct CalendarList: View {
         }
         //MARK: 月が5週の場合
         VStack{
-           
+            
             if self.weeknumber == 5{
-                
                 // 1週
                 HStack {
                     if self.startdaynumber != 0{
@@ -151,10 +185,15 @@ struct CalendarList: View {
                                 .foregroundColor(Color.clear)
                             
                             Button("\(index+1)"){
-                                print("\(month)月\(index + 1)日")
+                                date = "\(year)年\(month)月\(index + 1)日"
+                                getData(date: String(date))   //データ取得
+                                yoteiview.toggle()
                             }
                             .font(.system(size: 20))
                             .foregroundColor(.black)
+                            .sheet(isPresented:$yoteiview){
+                                YoteiView(date: $date, yotei: $yotei)
+                            }
                             
                         }
                     }
@@ -167,10 +206,15 @@ struct CalendarList: View {
                             RoundedRectangle(cornerRadius: 5).frame(width:50,height:90)
                                 .foregroundColor(Color.clear)
                             Button("\((self.column-self.startdaynumber)+1+index)"){
-                                print("\(month)月\((self.column-self.startdaynumber)+1+index)日")
+                                date = "\(year)年\(month)月\((self.column-self.startdaynumber)+1+index)日"
+                                getData(date: String(date))   //データ取得
+                                yoteiview.toggle()
                             }
                             .font(.system(size: 20))
                             .foregroundColor(.black)
+                            .sheet(isPresented:$yoteiview){
+                                YoteiView(date:$date, yotei:$yotei)
+                            }
                         }
                     }
                 }
@@ -182,10 +226,15 @@ struct CalendarList: View {
                             RoundedRectangle(cornerRadius: 5).frame(width:50,height:90)
                                 .foregroundColor(Color.clear)
                             Button("\(((7-self.startdaynumber)+1+index)+7)"){
-                                print("\(month)月\(((7-self.startdaynumber)+1+index)+7)日")
+                                date = "\(year)年\(month)月\(((7-self.startdaynumber)+1+index)+7)日"
+                                getData(date: String(date))   //データ取得
+                                yoteiview.toggle()
                             }
                             .font(.system(size: 20))
                             .foregroundColor(.black)
+                            .sheet(isPresented:$yoteiview){
+                                YoteiView(date:$date, yotei: $yotei)
+                            }
                         }
                     }
                 }
@@ -197,10 +246,15 @@ struct CalendarList: View {
                             RoundedRectangle(cornerRadius: 5).frame(width:50,height:90)
                                 .foregroundColor(Color.clear)
                             Button("\(((7-self.startdaynumber)+1+index)+14)"){
-                                print("\(month)月\(((7-self.startdaynumber)+1+index)+14)日")
+                                date = "\(year)年\(month)月\(((7-self.startdaynumber)+1+index)+14)日"
+                                getData(date: String(date))   //データ取得
+                                yoteiview.toggle()
                             }
                             .font(.system(size: 20))
                             .foregroundColor(.black)
+                            .sheet(isPresented:$yoteiview){
+                                YoteiView(date: $date, yotei: $yotei)
+                            }
                         }
                         
                     }
@@ -213,9 +267,16 @@ struct CalendarList: View {
                             ZStack(alignment: .top){
                                 RoundedRectangle(cornerRadius: 5).frame(width:50,height:90)
                                     .foregroundColor(Color.clear)
-                                Text("\(((7-self.startdaynumber)+1+index)+21)")
-                                    .font(.system(size: 20))
-                                    .foregroundColor(.black)
+                                Button("\(((7-self.startdaynumber)+1+index)+21)"){
+                                    date = "\(year)年\(month)月\(((7-self.startdaynumber)+1+index)+21)日"
+                                    getData(date: String(date))   //データ取得
+                                    yoteiview.toggle()
+                                }
+                                .font(.system(size: 20))
+                                .foregroundColor(.black)
+                                .sheet(isPresented:$yoteiview){
+                                    YoteiView(date:$date, yotei: $yotei)
+                                }
                             }
                         }
                         
@@ -235,10 +296,15 @@ struct CalendarList: View {
                                 RoundedRectangle(cornerRadius: 5).frame(width:50,height:90)
                                     .foregroundColor(Color.clear)
                                 Button("\(((7-self.startdaynumber)+1+index)+21)"){
-                                    print("\(month)月\(((7-self.startdaynumber)+1+index)+21)日")
+                                    date = "\(year)年\(month)月\(((7-self.startdaynumber)+1+index)+21)日"
+                                    getData(date: String(date))   //データ取得
+                                    yoteiview.toggle()
                                 }
                                 .font(.system(size: 20))
                                 .foregroundColor(.black)
+                                .sheet(isPresented:$yoteiview){
+                                    YoteiView(date:$date, yotei: $yotei)
+                                }
                             }
                             
                         }
@@ -269,10 +335,15 @@ struct CalendarList: View {
                                 RoundedRectangle(cornerRadius: 5).frame(width:50,height:75)
                                     .foregroundColor(Color.clear)
                                 Button("\(index+1)"){
-                                    print("\(month)月\(index + 1)日")
+                                    date = "\(year)年\(month)月\(index + 1)日"
+                                    getData(date: String(date))   //データ取得
+                                    yoteiview.toggle()
                                 }
                                 .font(.system(size: 20))
                                 .foregroundColor(.black)
+                                .sheet(isPresented:$yoteiview){
+                                    YoteiView(date: $date, yotei: $yotei)
+                                }
                             }
                         }
                     }
@@ -284,10 +355,15 @@ struct CalendarList: View {
                                 RoundedRectangle(cornerRadius: 5).frame(width:50,height:75)
                                     .foregroundColor(Color.clear)
                                 Button("\((self.column-self.startdaynumber)+1+index)"){
-                                    print("\(month)月\((self.column-self.startdaynumber)+1+index)日")
+                                    date = "\(year)年\(month)月\((self.column-self.startdaynumber)+1+index)日"
+                                    getData(date: String(date))   //データ取得
+                                    yoteiview.toggle()
                                 }
                                 .font(.system(size: 20))
                                 .foregroundColor(.black)
+                                .sheet(isPresented:$yoteiview){
+                                    YoteiView(date:$date, yotei: $yotei)
+                                }
                             }
                         }
                     }
@@ -299,10 +375,15 @@ struct CalendarList: View {
                                 RoundedRectangle(cornerRadius: 5).frame(width:50,height:75)
                                     .foregroundColor(Color.clear)
                                 Button("\(((7-self.startdaynumber)+1+index)+7)"){
-                                    print("\(month)月\(((7-self.startdaynumber)+1+index)+7)日")
+                                    date = "\(year)年\(month)月\(((7-self.startdaynumber)+1+index)+7)日"
+                                    getData(date: String(date))   //データ取得
+                                    yoteiview.toggle()
                                 }
                                 .font(.system(size: 20))
                                 .foregroundColor(.black)
+                                .sheet(isPresented:$yoteiview){
+                                    YoteiView(date:$date, yotei: $yotei)
+                                }
                             }
                         }
                     }
@@ -316,10 +397,15 @@ struct CalendarList: View {
                                 RoundedRectangle(cornerRadius: 5).frame(width:50,height:75)
                                     .foregroundColor(Color.clear)
                                 Button("\(((7-self.startdaynumber)+1+index)+14)"){
-                                    print("\(month)月\(((7-self.startdaynumber)+1+index)+14)日")
+                                    date = "\(year)年\(month)月\(((7-self.startdaynumber)+1+index)+7)日"
+                                    getData(date: String(date))   //データ取得
+                                    yoteiview.toggle()
                                 }
                                 .font(.system(size: 20))
                                 .foregroundColor(.black)
+                                .sheet(isPresented:$yoteiview){
+                                    YoteiView(date: $date, yotei: $yotei)
+                                }
                             }
                         }
                     }
@@ -331,10 +417,15 @@ struct CalendarList: View {
                                 RoundedRectangle(cornerRadius: 5).frame(width:50,height:75)
                                     .foregroundColor(Color.clear)
                                 Button("\(((7-self.startdaynumber)+1+index)+21)"){
-                                    print("\(month)月\(((7-self.startdaynumber)+1+index)+21)日")
+                                    date = "\(year)年\(month)月\(((7-self.startdaynumber)+1+index)+21)日"
+                                    getData(date: String(date))   //データ取得
+                                    yoteiview.toggle()
                                 }
                                 .font(.system(size: 20))
                                 .foregroundColor(.black)
+                                .sheet(isPresented:$yoteiview){
+                                    YoteiView(date:$date, yotei: $yotei)
+                                }
                             }
                         }
                     }
@@ -347,10 +438,15 @@ struct CalendarList: View {
                                     RoundedRectangle(cornerRadius: 5).frame(width:50,height:75)
                                         .foregroundColor(Color.clear)
                                     Button("\(((7-self.startdaynumber)+1+index)+28)"){
-                                        print("\(month)月\(((7-self.startdaynumber)+1+index)+28)日")
+                                        date = "\(year)年\(month)月\(((7-self.startdaynumber)+1+index)+28)日"
+                                        getData(date: String(date))   //データ取得
+                                        yoteiview.toggle()
                                     }
                                     .font(.system(size: 20))
                                     .foregroundColor(.black)
+                                    .sheet(isPresented:$yoteiview){
+                                        YoteiView(date:$date, yotei: $yotei)
+                                    }
                                 }
                             }
                             if self.lastweeknumber != 0{
@@ -370,15 +466,44 @@ struct CalendarList: View {
                                     RoundedRectangle(cornerRadius: 5).frame(width:50,height:75)
                                         .foregroundColor(Color.clear)
                                     Button("\(((7-self.startdaynumber)+1+index)+28)"){
-                                        print("\(month)月\(((7-self.startdaynumber)+1+index)+28)日")
+                                        date = "\(year)年\(month)月\(((7-self.startdaynumber)+1+index)+28)日"
+                                        getData(date: String(date))   //データ取得
+                                        yoteiview.toggle()
                                     }
                                     .font(.system(size: 20))
                                     .foregroundColor(.black)
+                                    .sheet(isPresented:$yoteiview){
+                                        YoteiView(date: $date, yotei: $yotei)
+                                    }
                                 }
                             }
                         }
                     }
                 }
+            }
+        }
+    }
+    
+    func getData(date:String){
+        //Realtime databaseに接続
+        var databaseRef: DatabaseReference!
+        // Firebaseの共有インスタンスを取得
+        databaseRef = Database.database().reference()
+        
+        databaseRef.child("userID").child(userID).child(date).child("yotei1").getData{(error, snapshot) in
+            if let error = error {
+                print("Error getting data \(error)")
+            }
+            else if snapshot.exists() {
+                guard let yotei = snapshot.value as? String else {
+                    return
+                }
+                self.yotei = yotei
+                print(self.yotei)
+            }
+            else {
+                self.yotei = "予定なし"
+                print("予定なし")
             }
         }
     }

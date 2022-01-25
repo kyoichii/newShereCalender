@@ -14,6 +14,7 @@
 		190F40F22727C75500E0D41A /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190F40F12727C75500E0D41A /* SettingView.swift */; };
 		191D0BD52756865D00CF19D4 /* HomeMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D0BD42756865D00CF19D4 /* HomeMenu.swift */; };
 		19304A4A2786706B003474BD /* ChangeDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19304A492786706B003474BD /* ChangeDateView.swift */; };
+		19473613278FB20F00F8A092 /* YoteiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19473612278FB20F00F8A092 /* YoteiView.swift */; };
 		19956046270C292300BBDC4B /* newShereCalenderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19956045270C292300BBDC4B /* newShereCalenderApp.swift */; };
 		19956048270C292300BBDC4B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19956047270C292300BBDC4B /* ContentView.swift */; };
 		1995604A270C292500BBDC4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19956049270C292500BBDC4B /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 		190F40F12727C75500E0D41A /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		191D0BD42756865D00CF19D4 /* HomeMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMenu.swift; sourceTree = "<group>"; };
 		19304A492786706B003474BD /* ChangeDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeDateView.swift; sourceTree = "<group>"; };
+		19473612278FB20F00F8A092 /* YoteiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoteiView.swift; sourceTree = "<group>"; };
 		19956042270C292300BBDC4B /* newShereCalender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = newShereCalender.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19956045270C292300BBDC4B /* newShereCalenderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newShereCalenderApp.swift; sourceTree = "<group>"; };
 		19956047270C292300BBDC4B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 				19304A492786706B003474BD /* ChangeDateView.swift */,
 				190F40E72727C64000E0D41A /* MemoView.swift */,
 				19956045270C292300BBDC4B /* newShereCalenderApp.swift */,
+				19473612278FB20F00F8A092 /* YoteiView.swift */,
 				190F40F12727C75500E0D41A /* SettingView.swift */,
 				19956047270C292300BBDC4B /* ContentView.swift */,
 				191D0BD42756865D00CF19D4 /* HomeMenu.swift */,
@@ -262,6 +265,7 @@
 				191D0BD52756865D00CF19D4 /* HomeMenu.swift in Sources */,
 				19F7FCA1270E99CD00224731 /* ProfileSetting.swift in Sources */,
 				19BD2A132733613500AF5AD8 /* CalenderList.swift in Sources */,
+				19473613278FB20F00F8A092 /* YoteiView.swift in Sources */,
 				190F40E82727C64000E0D41A /* MemoView.swift in Sources */,
 				19956056270C337A00BBDC4B /* LoginView.swift in Sources */,
 				19A6ED39270E84820062BB36 /* RegisterView.swift in Sources */,
